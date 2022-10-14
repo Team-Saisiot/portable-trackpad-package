@@ -3,6 +3,7 @@ require("dotenv").config();
 const app = require("../app");
 const debug = require("debug")("portable-trackpad-package:server");
 const http = require("http");
+const socket = require("../services/socket");
 const port = normalizePort(process.env.PORT || "8080");
 
 app.set("port", port);
@@ -13,7 +14,7 @@ server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
-app.io.attach(server);
+socket.attach(server);
 
 function normalizePort(val) {
   const port = parseInt(val, 10);

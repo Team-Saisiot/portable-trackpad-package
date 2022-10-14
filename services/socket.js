@@ -1,27 +1,16 @@
-const io = require("socket.io")({
+const app = require("../app");
+
+app.io = require("socket.io")({
   cors: {
-    origin: "https://192.168.0.45:8080",
-    methods: ["GET", "POST"],
+    origin: "*",
   },
 });
 
-const socketio = {
-  io: io,
-};
-
-io.on("connection", (socket) => {
-  console.log("Socket Connected!");
-  socket.broadcast.emit("welcome");
-
+app.io.on("connection", (socket) => {
   socket.on("user-send", (data) => {
     console.log("socket.on ~ data", data);
-
-    io.emit("broadcast", data);
+    app.io.emit("broadcast", data);
   });
 });
 
-io.on("disconnect", () => {
-  console.log("user disconnected");
-});
-
-module.exports = socketio;
+module.exports = app.io;
