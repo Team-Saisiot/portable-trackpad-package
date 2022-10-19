@@ -13,8 +13,6 @@ app.io = require("socket.io")({
 app.io.on("connection", (socket) => {
   socket.on("verify-connectable", (data) => {
     app.io.emit("broadcast", myLocalIpAddress);
-
-    console.log("socket.on ~ myLocalIpAddress", myLocalIpAddress);
   });
 
   socket.on("user-send", (data) => {
