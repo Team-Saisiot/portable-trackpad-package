@@ -1,5 +1,8 @@
 const app = require("../app");
 const robot = require("robotjs");
+const os = require("os");
+
+const myLocalIpAddress = os.networkInterfaces().en0[1].address;
 
 app.io = require("socket.io")({
   cors: {
@@ -8,6 +11,12 @@ app.io = require("socket.io")({
 });
 
 app.io.on("connection", (socket) => {
+  socket.on("verify-connectable", (data) => {
+    app.io.emit("broadcast", myLocalIpAddress);
+
+    console.log("socket.on ~ myLocalIpAddress", myLocalIpAddress);
+  });
+
   socket.on("user-send", (data) => {
     const { x: xPosition, y: yPosition } = robot.getMousePos();
 
