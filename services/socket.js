@@ -19,6 +19,10 @@ app.io.on("connection", (socket) => {
     switch (data[0]) {
       case "click":
         robot.mouseClick();
+
+        break;
+      case "rightClick":
+        robot.mouseClick("right");
     }
   });
 });
