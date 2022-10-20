@@ -23,6 +23,20 @@ app.io.on("connection", (socket) => {
         break;
       case "rightClick":
         robot.mouseClick("right");
+
+        break;
+      case "rightClick":
+        robot.mouseClick("right");
+
+        break;
+      case "move":
+        if (data[1] < 30 && data[1] > -30 && data[2] < 30 && data[2] > -30) {
+          const { x: xPositon, y: yPosition } = robot.getMousePos();
+
+          robot.moveMouse(xPositon + data[1] * 2, yPosition + data[2] * 2);
+        }
+
+        break;
     }
   });
 });
