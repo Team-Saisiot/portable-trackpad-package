@@ -33,12 +33,6 @@ app.io.on("connection", (socket) => {
         }
 
         break;
-      case "scroll":
-        if (data[2] < 120 && data[2] > -120) {
-          robot.scrollMouse(0, data[2]);
-        }
-
-        break;
       case "dragDown":
         robot.mouseToggle("down");
         break;
