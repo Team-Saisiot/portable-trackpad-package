@@ -25,17 +25,25 @@ app.io.on("connection", (socket) => {
         robot.mouseClick("right");
 
         break;
-      case "rightClick":
-        robot.mouseClick("right");
-
-        break;
       case "move":
         if (data[1] < 30 && data[1] > -30 && data[2] < 30 && data[2] > -30) {
-          const { x: xPositon, y: yPosition } = robot.getMousePos();
+          const { x: xPosition, y: yPosition } = robot.getMousePos();
 
-          robot.moveMouse(xPositon + data[1] * 2, yPosition + data[2] * 2);
+          robot.moveMouse(xPosition + data[1] * 2.5, yPosition + data[2] * 2.5);
         }
 
+        break;
+      case "scroll":
+        if (data[2] < 120 && data[2] > -120) {
+          robot.scrollMouse(0, data[2]);
+        }
+
+        break;
+      case "dragDown":
+        robot.mouseToggle("down");
+        break;
+      case "dragUp":
+        robot.mouseToggle("up");
         break;
     }
   });
