@@ -15,22 +15,15 @@ app.io.on("connection", (socket) => {
     app.io.emit("broadcast", myLocalIpAddress);
   });
 
-  socket.on("user-send", (data) => {
-    const { x: xPosition, y: yPosition } = robot.getMousePos();
+  socket.on("user-send", async (data) => {
+    switch (data[0]) {
+      case "click":
+        robot.mouseClick();
 
-    if (data === "down") {
-      robot.moveMouse(xPosition, yPosition + 10);
-    } else if (data === "left") {
-      robot.moveMouse(xPosition - 10, yPosition);
-    } else if (data === "right") {
-      robot.moveMouse(xPosition + 10, yPosition);
-    } else if (data === "up") {
-      robot.moveMouse(xPosition, yPosition - 10);
-    } else if (data === "click") {
-      robot.mouseClick();
+        break;
+      case "rightClick":
+        robot.mouseClick("right");
     }
-
-    app.io.emit("broadcast", data);
   });
 });
 
