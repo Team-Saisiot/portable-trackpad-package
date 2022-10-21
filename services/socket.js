@@ -39,6 +39,14 @@ app.io.on("connection", (socket) => {
         }
 
         break;
+      case "volume":
+        if (data[1] > 0) {
+          robot.keyTap("audio_vol_up");
+        } else {
+          robot.keyTap("audio_vol_down");
+        }
+
+        break;
       case "dragDown":
         robot.mouseToggle("down");
         break;
