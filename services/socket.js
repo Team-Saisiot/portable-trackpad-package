@@ -47,20 +47,28 @@ app.io.on("connection", (socket) => {
         }
 
         break;
+      case "goForwardInTap":
+        robot.keyTap("tab", "control");
+
+        break;
+      case "goBackInTap":
+        robot.keyTap("tab", ["control", "shift"]);
+
+        break;
+      case "goForwardInBrowser":
+        robot.keyTap("]", "command");
+
+        break;
+      case "goBackInBrowser":
+        robot.keyTap("[", "command");
+
+        break;
       case "dragDown":
         robot.mouseToggle("down");
 
         break;
       case "dragUp":
         robot.mouseToggle("up");
-
-        break;
-      case "goForwardInBrowser":
-        robot.keyTap("left", "command");
-
-        break;
-      case "goBackInBrowser":
-        robot.keyTap("right", "command");
 
         break;
     }
