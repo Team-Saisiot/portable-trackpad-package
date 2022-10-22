@@ -11,9 +11,9 @@ app.io = require("socket.io")({
 });
 
 app.io.on("connection", (socket) => {
-  socket.on("verify-connectable", (data) => {
-    app.io.emit("broadcast", myLocalIpAddress);
-  });
+  socket.on("verify-connectable", () =>
+    socket.broadcast.emit("verify-connectable", myLocalIpAddress),
+  );
 
   socket.on("user-send", async (data) => {
     switch (data[0]) {
@@ -69,6 +69,23 @@ app.io.on("connection", (socket) => {
         break;
       case "dragUp":
         robot.mouseToggle("up");
+
+        break;
+    }
+  });
+
+  socket.on("drawing", (data) => {
+    switch (data[0]) {
+      case "세모":
+        app.io.emit("drawing", "세모");
+
+        break;
+      case "네모":
+        app.io.emit("drawing", "네모");
+
+        break;
+      case "동그라미":
+        app.io.emit("drawing", "동그라미");
 
         break;
     }
