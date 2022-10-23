@@ -77,15 +77,15 @@ app.io.on("connection", (socket) => {
   socket.on("drawing", (data) => {
     switch (data[0]) {
       case "세모":
-        app.io.emit("drawing", "세모");
+        app.io.emit("drawing", "triangle");
 
         break;
       case "네모":
-        app.io.emit("drawing", "네모");
+        app.io.emit("drawing", "square");
 
         break;
       case "동그라미":
-        app.io.emit("drawing", "동그라미");
+        app.io.emit("drawing", "circle");
 
         break;
     }
