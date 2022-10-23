@@ -11,8 +11,6 @@ app.io = require("socket.io")({
 });
 
 app.io.on("connection", (socket) => {
-  socket.on("drawing", (data) => socket.broadcast.emit("drawing", data));
-
   socket.on("verify-connectable", () =>
     socket.broadcast.emit("verify-connectable", myLocalIpAddress),
   );
@@ -67,9 +65,28 @@ app.io.on("connection", (socket) => {
         break;
       case "dragDown":
         robot.mouseToggle("down");
+
         break;
       case "dragUp":
         robot.mouseToggle("up");
+
+        break;
+    }
+  });
+
+  socket.on("drawing", (data) => {
+    switch (data[0]) {
+      case "세모":
+        app.io.emit("drawing", "triangle");
+
+        break;
+      case "네모":
+        app.io.emit("drawing", "square");
+
+        break;
+      case "동그라미":
+        app.io.emit("drawing", "circle");
+
         break;
     }
   });
