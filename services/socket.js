@@ -76,16 +76,24 @@ app.io.on("connection", (socket) => {
 
   socket.on("drawing", (data) => {
     switch (data[0]) {
-      case "세모":
+      case "triangle":
         app.io.emit("drawing", "triangle");
 
         break;
-      case "네모":
+      case "square":
         app.io.emit("drawing", "square");
 
         break;
-      case "동그라미":
+      case "circle":
         app.io.emit("drawing", "circle");
+
+        break;
+      case "scaleUp":
+        app.io.emit("drawing", "scaleUp");
+
+        break;
+      case "scaleDown":
+        app.io.emit("drawing", "scaleDown");
 
         break;
     }
