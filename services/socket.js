@@ -11,6 +11,22 @@ app.io = require("socket.io")({
 });
 
 app.io.on("connection", (socket) => {
+  socket.on("drawing", (data) => {
+    socket.broadcast.emit("drawing", data);
+  });
+
+  socket.on("figure", (data) => {
+    socket.broadcast.emit("figure", data);
+  });
+
+  socket.on("drawingHistory", (data) => {
+    socket.broadcast.emit("drawingHistory", data);
+  });
+
+  socket.on("figureHistory", (data) => {
+    socket.broadcast.emit("figureHistory", data);
+  });
+
   socket.on("verify-connectable", () =>
     socket.broadcast.emit("verify-connectable", myLocalIpAddress),
   );
@@ -39,12 +55,24 @@ app.io.on("connection", (socket) => {
         }
 
         break;
-      case "volume":
-        if (data[1] > 0) {
-          robot.keyTap("audio_vol_up");
-        } else {
-          robot.keyTap("audio_vol_down");
-        }
+      case "volumeUp":
+        robot.keyTap("audio_vol_up");
+
+        break;
+      case "volumeDown":
+        robot.keyTap("audio_vol_down");
+
+        break;
+      case "mute":
+        robot.keyTap("audio_mute");
+
+        break;
+      case "play":
+        robot.keyTap("audio_play");
+
+        break;
+      case "pause":
+        robot.keyTap("audio_pause");
 
         break;
       case "goForwardInTap":
