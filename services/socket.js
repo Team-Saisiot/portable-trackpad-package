@@ -11,22 +11,6 @@ app.io = require("socket.io")({
 });
 
 app.io.on("connection", (socket) => {
-  socket.on("drawing", (data) => {
-    socket.broadcast.emit("drawing", data);
-  });
-
-  socket.on("figure", (data) => {
-    socket.broadcast.emit("figure", data);
-  });
-
-  socket.on("drawingHistory", (data) => {
-    socket.broadcast.emit("drawingHistory", data);
-  });
-
-  socket.on("figureHistory", (data) => {
-    socket.broadcast.emit("figureHistory", data);
-  });
-
   socket.on("verify-connectable", () =>
     socket.broadcast.emit("verify-connectable", myLocalIpAddress),
   );
@@ -102,26 +86,26 @@ app.io.on("connection", (socket) => {
     }
   });
 
-  socket.on("drawing", (data) => {
+  socket.on("drawingGesture", (data) => {
     switch (data[0]) {
       case "triangle":
-        app.io.emit("drawing", "triangle");
+        app.io.emit("drawingGesture", "triangle");
 
         break;
       case "square":
-        app.io.emit("drawing", "square");
+        app.io.emit("drawingGesture", "square");
 
         break;
       case "circle":
-        app.io.emit("drawing", "circle");
+        app.io.emit("drawingGesture", "circle");
 
         break;
       case "scaleUp":
-        app.io.emit("drawing", "scaleUp");
+        app.io.emit("drawingGesture", "scaleUp");
 
         break;
       case "scaleDown":
-        app.io.emit("drawing", "scaleDown");
+        app.io.emit("drawingGesture", "scaleDown");
 
         break;
     }
