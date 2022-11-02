@@ -1,6 +1,7 @@
 const app = require("../app");
 const robot = require("robotjs");
 const os = require("os");
+const open = require("open");
 
 const myLocalIpAddress = os.networkInterfaces().en0[1].address;
 
@@ -81,6 +82,10 @@ app.io.on("connection", (socket) => {
         break;
       case "dragUp":
         robot.mouseToggle("up");
+
+        break;
+      case "openGestureDrawing":
+        open("https://gesture-drawing.online/");
 
         break;
     }
